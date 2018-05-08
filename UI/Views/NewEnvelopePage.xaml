@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="UI.Views.NewEnvelopePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="using:UI.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:NewEnvelopePageViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border BorderThickness="2" Margin="20" CornerRadius="10" BorderBrush="Firebrick" VerticalAlignment="Center">
+                <Grid Height="290" Width="500" CornerRadius="10" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                   Text="Create New Envelope" FontSize="20"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <TextBox x:Name="tb_EnvelopeName" Grid.Row="1" Grid.Column="0" Header="Envelope Name: " PlaceholderText="Type the Envelope Name" Text="{Binding EnvelopeName, Mode=TwoWay }"/>
+
+                    <TextBox x:Name="tb_EnvelopeValue" Grid.Row="1" Grid.Column="2" Header="Envelope Value: " PlaceholderText="Type the Envelope Value" Text="{Binding EnvelopeValue, Mode=TwoWay}"/>
+
+                    <TextBox x:Name="tb_EnvelopeDetails" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Envelope Details" PlaceholderText="Type the Envelope details" Text="{Binding EnvelopeDetails, Mode=TwoWay}"/>
+
+                    <Button Grid.Row="3" Grid.Column="0" Content="Save"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CreateNewTransactionCommand}"
+                IsEnabled="{Binding HasError}"/>
+
+                    <Button Grid.Row="3" Grid.Column="3" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CancelCommand}"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+    </Grid>
+
+
+</Page>

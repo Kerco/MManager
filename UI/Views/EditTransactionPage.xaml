@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="UI.Views.EditTransactionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="using:UI.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:EditTransactionPageViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border BorderThickness="2" Margin="20" CornerRadius="10" BorderBrush="Firebrick" VerticalAlignment="Center">
+
+                <Grid Height="350" Width="500" CornerRadius="10" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                   Text="Edit Transaction" FontSize="20"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}" Style="{StaticResource TextBoxStyle2}">
+                    </TextBox>
+
+                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Value: " PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}" Style="{StaticResource TextBoxStyle1}">
+                    </TextBox>
+
+                    <CalendarDatePicker x:Name="TranDate" Grid.Row="2" Grid.Column="0" Header="Transaction Date: " Date="{Binding TranDate, Mode=TwoWay}"/>
+
+                    <ComboBox x:Name="TranType" Grid.Row="2" Grid.Column="2" ItemsSource="{Binding TransactionTypes}" Header="Transaction Type: " PlaceholderText="Select the Transaction Type" SelectedItem="{Binding TranType, Mode=TwoWay}"/>
+
+
+                    <TextBox x:Name="tb_TranDetails" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Header="Transaction Details" PlaceholderText="Type the Transaction details" Text="{Binding TranDetails, Mode=TwoWay}"/>
+
+                    <Button Grid.Row="4" Grid.Column="0" Content="Save"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding EditTransactionCommand}"
+                            IsEnabled="{Binding HasError}"/>
+
+                    <Button Grid.Row="4" Grid.Column="3" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CancelCommand}"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>
+
