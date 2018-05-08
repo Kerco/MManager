@@ -43,7 +43,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public string AccGender
         {
             get { return _accGender; }
@@ -52,7 +51,6 @@ namespace UI.ViewModels
                 Set(ref _accGender, value);
             }
         }
-
 
         public string AccEmail
         {
@@ -63,7 +61,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public string AccUserName
         {
             get { return _accUserName; }
@@ -72,7 +69,6 @@ namespace UI.ViewModels
                 Set(ref _accUserName, value);
             }
         }
-
 
         public Transaction SelecetedTransaction
         {
@@ -83,7 +79,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public string RemainingMoney
         {
             get { return _remainingMoney; }
@@ -92,7 +87,6 @@ namespace UI.ViewModels
                 Set(ref _remainingMoney, value);
             }
         }
-
 
         public int Expense
         {
@@ -112,9 +106,6 @@ namespace UI.ViewModels
                 Set(ref _income, value);
             }
         }
-
-
-
 
         public DelegateCommand CreateNewTransactionCommand { get; }
         public DelegateCommand EditEnvelopeCommand { get; }

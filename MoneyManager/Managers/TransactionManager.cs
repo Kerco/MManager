@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoneyManager.Data;
+using MoneyManager.Exceptions;
+using MoneyManager.Filter;
 using MoneyManager.Interfaces.Managers;
 using MoneyManager.Models;
 using System;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Managers
 {
+    [NotFoundExceptionFilter]
     public class TransactionManager : ITransactionManager
     {
 
@@ -32,7 +35,7 @@ namespace MoneyManager.Managers
                         .SingleOrDefaultAsync(t => t.Id == id);
             if (transaction == null)
             {
-                //return NotFound();
+                throw new NotFoundException();
             }
             _context.Transactions.Remove(transaction);
             await _context.SaveChangesAsync();
@@ -44,7 +47,7 @@ namespace MoneyManager.Managers
                    .SingleOrDefaultAsync(m => m.Id == id);
             if (transaction == null)
             {
-                //throw not found exception...
+                throw new NotFoundException();
             }
             return transaction;
         }
@@ -53,14 +56,14 @@ namespace MoneyManager.Managers
         {
             if (id != transaction.Id)
             {
-                //return not found
+                throw new BadRequestException();
             }
             _context.Update(transaction);
             await _context.SaveChangesAsync();
 
             if (!TransactionExists(transaction.Id))
             {
-                //return NotFound();
+                throw new BadRequestException();
             }
             return transaction;
 
@@ -73,7 +76,7 @@ namespace MoneyManager.Managers
                                             .Where(t => t.EnvelopeId == id).ToListAsync();
             if (transaction == null)
             {
-                //return NotFound();
+                throw new NotFoundException();
             }
             return transaction;
         }

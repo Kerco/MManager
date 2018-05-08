@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Managers
 {
-    
+    [NotFoundExceptionFilter]
     public class EnvelopeManager : IEnvelopeManager
     {
         private ManagerContext _context { get; }
@@ -26,7 +26,6 @@ namespace MoneyManager.Managers
             return envelopes;
         }
         
-        [NotFoundExceptionFilter]
         public async Task<List<Envelope>> AccountEnvelope(string id)
         {
             if (id == null)
@@ -44,7 +43,7 @@ namespace MoneyManager.Managers
                                          .SingleOrDefaultAsync(m => m.Id == id);
             if (envelope == null)
             {
-                //return NotFound();
+                throw new NotFoundException();
             }
             return envelope;
         }
@@ -56,7 +55,7 @@ namespace MoneyManager.Managers
 
             if (envelope == null)
             {
-                //return NotFound();
+                throw new NotFoundException();
             }
             return envelope;
         }
@@ -72,14 +71,14 @@ namespace MoneyManager.Managers
         {
             if (id != envelope.Id)
             {
-                throw new NotFoundException();
+                throw new BadRequestException();
             }
             _context.Update(envelope);
             await _context.SaveChangesAsync();
 
             if (!EnvelopeExists(envelope.Id))
             {
-                throw new NotFoundException();
+                throw new BadRequestException();
             }
             return envelope;
         }
@@ -90,7 +89,7 @@ namespace MoneyManager.Managers
 
             if (envelope == null)
             {
-                //return NotFound();
+                throw new NotFoundException();
             }
 
             _context.Envelopes.Remove(envelope);

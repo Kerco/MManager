@@ -60,7 +60,7 @@
                                                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Gender}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0"/>
                                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Birthday:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"/>
                                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding BirthDay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0"/>
-                                                <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="LogOut" HorizontalAlignment="Center" Command="{Binding LogOut}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0"/>
+                                                <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="Logout" HorizontalAlignment="Center" Command="{Binding LogOut}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0"/>
                                             </Grid>
                                         </Flyout>
                                     </Button.Flyout>

@@ -35,6 +35,7 @@ namespace MoneyManager
             services.AddMvc(options =>
             {
                 options.Filters.Add<NotFoundExceptionFilter>();
+                options.Filters.Add<ModelStateFilter>();
             });
             services.AddDbContext<ManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().AddJsonOptions(options =>

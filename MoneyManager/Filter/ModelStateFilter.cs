@@ -18,14 +18,5 @@ namespace MoneyManager.Filter
 
             }
         }
-
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            if (context.Result is NotFoundException)
-            {
-
-            }
-            base.OnActionExecuted(context);
-        }
     }
 }

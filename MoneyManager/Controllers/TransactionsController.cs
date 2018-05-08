@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MoneyManager.Data;
+using MoneyManager.Filter;
 using MoneyManager.Interfaces.Managers;
 using MoneyManager.Models;
 
@@ -43,14 +44,11 @@ namespace MoneyManager.Controllers
         }
 
         [HttpPost]
+        [ModelStateFilter]
         public async Task<IActionResult> Create([FromBody] Transaction transaction)
         {
-            if (ModelState.IsValid)
-            {
                 await TransactionManager.Create(transaction);
                 return Ok();
-            }
-            return BadRequest();
         }
 
         [HttpGet]
@@ -61,15 +59,11 @@ namespace MoneyManager.Controllers
         }
 
         [HttpPost]
+        [ModelStateFilter]
         public async Task<IActionResult> EditTransaction(int id, [FromBody] Transaction transaction)
         {
-
-            if (ModelState.IsValid)
-            {
                 await TransactionManager.Edit(id, transaction);
                 return Ok();
-            }
-            return BadRequest();
         }
 
 

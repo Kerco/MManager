@@ -17,6 +17,16 @@ namespace MoneyManager.Filter
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 context.Exception = null;
             }
+            else if(context.Exception is BadRequestException)
+            {
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.Exception = null;
+            }
+            else
+            {
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Exception = null;
+            }
             base.OnException(context);
         }
     }
