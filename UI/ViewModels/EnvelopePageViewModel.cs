@@ -9,6 +9,10 @@ using Template10.Services.NavigationService;
 using UI.Model;
 using UI.Services;
 using UI.Views;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace UI.ViewModels
@@ -136,11 +140,22 @@ namespace UI.ViewModels
 
         private async void DeleteAsync()
         {
-            var contentDialog = new DeleteConfirmation(SelectedEnvelope.Id);
-            await contentDialog.ShowAsync();
-
-            await LoadAsync();
-
+            ContentDialog Delete = new ContentDialog
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(1.5),
+                Title = "Delete Envelope",
+                Content = "Are you sure want to Delete " + SelectedEnvelope.Name + " Envelope?",
+                CloseButtonText = "No",
+                PrimaryButtonText = "Yes"
+            };
+            ContentDialogResult res = await Delete.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                var service = new EnvelopeManager();
+                bool result = await service.DeleteEnvelopeConfirmedAsync(SelectedEnvelope.Id);
+                await LoadAsync();
+            }
         }
 
         private void NavigateToNewEnvelope()

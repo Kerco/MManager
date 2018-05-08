@@ -116,6 +116,7 @@ namespace UI.ViewModels
             var service = new TransactionManager();
             Transaction tran = new Transaction
             {
+                Id = transactionID,
                 Name = TranName,
                 Value = TranValue,
                 EnvelopeId = envelopeID,

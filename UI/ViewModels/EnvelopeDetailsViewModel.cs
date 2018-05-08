@@ -8,6 +8,10 @@ using Template10.Mvvm;
 using UI.Model;
 using UI.Services;
 using UI.Views;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace UI.ViewModels
@@ -113,14 +117,10 @@ namespace UI.ViewModels
 
 
         public DelegateCommand CreateNewTransactionCommand { get; }
-
         public DelegateCommand EditEnvelopeCommand { get; }
         public DelegateCommand EditTransactionCommand { get; }
-
         public DelegateCommand DeleteEnvelopeCommand { get; }
-
         public DelegateCommand DeleteTransactionCommand { get; }
-
         public DelegateCommand Logout { get; }
 
         public string EnvelopeDetails
@@ -171,17 +171,45 @@ namespace UI.ViewModels
 
         private async void DeleteTransactionAsync()
         {
-            var contentDialog = new DeleteTransaction(SelecetedTransaction.Id);
-            await contentDialog.ShowAsync();
-
-            await Load();
+            ContentDialog Delete = new ContentDialog
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(1.5),
+                Title = "Delete Transaction",
+                Content = "Are you sure want to Delete " + SelecetedTransaction.Name + " Transaction?",
+                CloseButtonText = "No",
+                PrimaryButtonText = "Yes"
+            };
+            ContentDialogResult res = await Delete.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                var service = new TransactionManager();
+                bool result = await service.DeleteTransactionConfirmedAsync(SelecetedTransaction.Id);
+                await Load();
+            }
 
         }
 
         private async void DeleteConfirmation()
         {
-            var contentDialog = new DeleteConfirmation(envelopeID);
-            await contentDialog.ShowAsync();
+
+            ContentDialog Delete = new ContentDialog
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(1.5),
+                Title = "Delete Envelope",
+                Content = "Are you sure want to Delete " + EnvelopeName + " Envelope?",
+                CloseButtonText = "No",
+                PrimaryButtonText = "Yes"
+            };
+            ContentDialogResult res = await Delete.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                var service = new EnvelopeManager();
+                bool result = await service.DeleteEnvelopeConfirmedAsync(envelopeID);
+
+                NavigationService.Navigate(typeof(EnvelopePage), accID);
+            }
         }
 
         private void NavigateToEditTransaction()

@@ -109,8 +109,6 @@
     <Compile Include="Services\AccountManager.cs" />
     <Compile Include="Services\EnvelopeManager.cs" />
     <Compile Include="Services\TransactionManager.cs" />
-    <Compile Include="ViewModels\DeleteConfirmationViewModel.cs" />
-    <Compile Include="ViewModels\DeleteTransactionViewModel.cs" />
     <Compile Include="ViewModels\EditEnvelopePageViewModel.cs" />
     <Compile Include="ViewModels\EditTransactionPageViewModel.cs" />
     <Compile Include="ViewModels\EnvelopeDetailsViewModel.cs" />
@@ -120,12 +118,6 @@
     <Compile Include="ViewModels\NewEnvelopePageViewModel.cs" />
     <Compile Include="ViewModels\NewTransactionPageViewModel.cs" />
     <Compile Include="ViewModels\RegisterPageViewModel.cs" />
-    <Compile Include="Views\DeleteConfirmation.xaml.cs">
-      <DependentUpon>DeleteConfirmation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DeleteTransaction.xaml.cs">
-      <DependentUpon>DeleteTransaction.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\EditEnvelopePage.xaml.cs">
       <DependentUpon>EditEnvelopePage.xaml</DependentUpon>
     </Compile>
@@ -181,14 +173,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Views\DeleteConfirmation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DeleteTransaction.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditEnvelopePage.xaml">
       <SubType>Designer</SubType>

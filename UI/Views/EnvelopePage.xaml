@@ -35,7 +35,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel  Grid.Row="0" Background="White">
-                                <Button Background="White" >
+                                <Button Background="White">
                                     <Image Source="ms-appx:///Assets/index.png" Stretch="Uniform" MaxHeight="35" MaxWidth="35"/>
                                     <Button.Flyout>
                                         <Flyout >
@@ -60,7 +60,7 @@
                                                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Gender}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0"/>
                                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Birthday:" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"/>
                                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding BirthDay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0"/>
-                                                <Button Grid.Row="4" Grid.Column="1" Content="LogOut" HorizontalAlignment="Center" Command="{Binding LogOut}"/>
+                                                <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="LogOut" HorizontalAlignment="Center" Command="{Binding LogOut}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0"/>
                                             </Grid>
                                         </Flyout>
                                     </Button.Flyout>
@@ -86,8 +86,8 @@
                                     </DataTemplate>
                                 </controls:DataGrid.ItemDetailsTemplate>
                             </controls:DataGrid>
-                            <StackPanel Grid.Row="2" Background="Green">
-                                <Button  HorizontalAlignment="Center" Content="Create New Envelope" Background="Red" Command="{Binding CreateEnvelope}"/>
+                            <StackPanel Grid.Row="2" Background="White">
+                                <Button  HorizontalAlignment="Center" Content="Create New Envelope" Command="{Binding CreateEnvelope}" BorderBrush="Black" BorderThickness="1.5" />
                             </StackPanel>
                         </Grid>
                     </Border>

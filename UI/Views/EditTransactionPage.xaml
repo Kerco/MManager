@@ -36,10 +36,10 @@
                    Text="Edit Transaction" FontSize="20"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}" Style="{StaticResource TextBoxStyle2}">
+                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}">
                     </TextBox>
 
-                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Value: " PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}" Style="{StaticResource TextBoxStyle1}">
+                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Value: " PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}">
                     </TextBox>
 
                     <CalendarDatePicker x:Name="TranDate" Grid.Row="2" Grid.Column="0" Header="Transaction Date: " Date="{Binding TranDate, Mode=TwoWay}"/>
