@@ -8,6 +8,7 @@ using Template10.Mvvm;
 using UI.Model;
 using UI.Services;
 using UI.Views;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace UI.ViewModels
@@ -53,18 +54,29 @@ namespace UI.ViewModels
         {
             var service = new AccountManager();
 
-            var acc = await service.GetAccountByUserName(EmailAddress);
             LoginViewModel model = new LoginViewModel
             {
                 Email = EmailAddress,
                 Password = this.Password
             };
 
-            await service.LogInAsync(model);
+            var res = await service.LogInAsync(model);
+            if (res == null)
+            {
+                ContentDialog LoginFailedDialog = new ContentDialog
+                {
+                    Title = "Login Failed",
+                    Content = "Your UserName or Password is incorrect please try again.",
+                    CloseButtonText = "Try Again"
+                };
 
-            //var acc = await service.GetAccountByEmail(EmailAddress);
-
-            NavigationService.Navigate(typeof(EnvelopePage), acc.Id);
+                ContentDialogResult result = await LoginFailedDialog.ShowAsync();
+            }
+            else
+            {
+                var acc = await service.GetAccountByUserName(EmailAddress);
+                NavigationService.Navigate(typeof(EnvelopePage), acc.Id);
+            }
         }
 
         public async override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)

@@ -121,9 +121,11 @@ namespace UI.Services
                 string route = "Accounts/Login";
                 var response = await client.PostAsync(route, myContent);
                 if (response.IsSuccessStatusCode)
-                    return JsonConvert.DeserializeObject<Account>(await response.Content.ReadAsStringAsync());
+                {
+                    return new Account();
+                }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
-                    throw new NotFoundException("Invalid input parameters");
+                    return null;
             }
             throw new ServiceConnectException("Service unavailable");
         }

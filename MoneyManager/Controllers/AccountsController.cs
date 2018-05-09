@@ -83,10 +83,10 @@ namespace MoneyManager.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return StatusCode(302);
+                    return BadRequest();
                 }
             }
-            return StatusCode(302);
+            return BadRequest();
         }
 
         [HttpPost]
