@@ -9,6 +9,7 @@ using Template10.Mvvm;
 using UI.Model;
 using UI.Services;
 using UI.Views;
+using Windows.UI.Xaml.Controls;
 
 namespace UI.ViewModels
 {
@@ -157,11 +158,23 @@ namespace UI.ViewModels
             else if (String.Equals(SelectedGender, GenderType[1]))
                 model.Gender = false;
 
-            await service.RegsiterAsync(model);
+            var res = await service.RegsiterAsync(model);
+            if (res == null)
+            {
+                ContentDialog LoginFailedDialog = new ContentDialog
+                {
+                    Title = "Registration Failed",
+                    Content = "Please check your input parameters and try again",
+                    CloseButtonText = "Try Again"
+                };
 
-            var acc = await service.GetAccountByEmail(EmailAddress);
-
-            NavigationService.Navigate(typeof(EnvelopePage), acc.Id);
+                ContentDialogResult result = await LoginFailedDialog.ShowAsync();
+            }
+            else
+            {
+                var acc = await service.GetAccountByEmail(EmailAddress);
+                NavigationService.Navigate(typeof(EnvelopePage), acc.Id);
+            }
         }
         private void NavigatoBack()
         {

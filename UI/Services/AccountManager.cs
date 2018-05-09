@@ -54,9 +54,9 @@ namespace UI.Services
                 string route = "Accounts/Register";
                 var response = await client.PostAsync(route, myContent);
                 if (response.IsSuccessStatusCode)
-                    return JsonConvert.DeserializeObject<Account>(await response.Content.ReadAsStringAsync());
+                    return new Account();
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
-                    throw new NotFoundException("Invalid input account");
+                    return null;
 
             }
             throw new ServiceConnectException("Service unavailable");
