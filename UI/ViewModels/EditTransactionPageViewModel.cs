@@ -15,6 +15,8 @@ namespace UI.ViewModels
 {
     class EditTransactionPageViewModel : ViewModelBase
     {
+        public ObservableCollection<String> TransactionTypes { get; set; } = new ObservableCollection<String>();
+        private Transaction _transaction;
         public static int transactionID;
         private string _tranName;
         private DateTimeOffset _tranDate;
@@ -23,9 +25,8 @@ namespace UI.ViewModels
         private string _tranType;
         private string _tranDetails;
         public static int envelopeID;
-
         private bool _errorName;
-
+        private bool _errorValue;
         public bool ErrorName
         {
             get { return !_errorName; }
@@ -34,9 +35,6 @@ namespace UI.ViewModels
                 Set(ref _errorName, value);
             }
         }
-
-        private bool _errorValue;
-
         public bool ErrorValue
         {
             get { return !_errorValue; }
@@ -45,11 +43,6 @@ namespace UI.ViewModels
                 Set(ref _errorValue, value);
             }
         }
-
-        public ObservableCollection<String> TransactionTypes { get; set; } = new ObservableCollection<String>();
-
-        private Transaction _transaction;
-
         public Transaction Transaction
         {
             get { return _transaction; }
@@ -59,10 +52,6 @@ namespace UI.ViewModels
                 CheckError();
             }
         }
-
-        public DelegateCommand EditTransactionCommand { get; }
-        public DelegateCommand CancelCommand { get; }
-
         public string TranDetails
         {
             get { return _tranDetails; }
@@ -72,7 +61,6 @@ namespace UI.ViewModels
                 CheckError();
             }
         }
-
         public string TranType
         {
             get { return _tranType; }
@@ -82,7 +70,6 @@ namespace UI.ViewModels
                 CheckError();
             }
         }
-
         public DateTimeOffset TranDate
         {
             get { return _tranDate; }
@@ -93,7 +80,6 @@ namespace UI.ViewModels
 
             }
         }
-
         public bool HasError
         {
             get { return !_hasError; }
@@ -102,19 +88,15 @@ namespace UI.ViewModels
                 Set(ref _hasError, value);
             }
         }
-
         public string TranName
         {
             get { return _tranName; }
             set
             {
-
                 Set(ref _tranName, value);
                 CheckName();
-
             }
         }
-
         public int TranValue
         {
             get { return _tranValue; }
@@ -124,6 +106,8 @@ namespace UI.ViewModels
                 CheckValue();
             }
         }
+        public DelegateCommand EditTransactionCommand { get; }
+        public DelegateCommand CancelCommand { get; }
 
         public EditTransactionPageViewModel()
         {
@@ -151,12 +135,10 @@ namespace UI.ViewModels
             NavigationService.Navigate(typeof(EnvelopeDetails), envelopeID);
 
         }
-
         private void Cancel()
         {
             NavigationService.Navigate(typeof(EnvelopeDetails), envelopeID);
         }
-
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             transactionID = (int)parameter;
@@ -179,7 +161,10 @@ namespace UI.ViewModels
             }
 
         }
-        private void CheckName()
+        /// <summary>
+        /// Checks if the Name is eligible.
+        /// </summary>
+        public void CheckName()
         {
             if (string.IsNullOrWhiteSpace(TranName))
             {
@@ -191,8 +176,10 @@ namespace UI.ViewModels
 
             CheckError();
         }
-
-        private void CheckValue()
+        /// <summary>
+        /// Checks if the Value is eligible.
+        /// </summary>
+        public void CheckValue()
         {
             if (TranValue <= 0)
             {
@@ -202,8 +189,10 @@ namespace UI.ViewModels
 
             CheckError();
         }
-
-        private void CheckError()
+        /// <summary>
+        /// Checks if everything is eligible.
+        /// </summary>
+        public void CheckError()
         {
             if (ErrorName == false)
             {
@@ -218,9 +207,6 @@ namespace UI.ViewModels
                 return;
             }
             else HasError = false;
-
         }
-
-
     }
 }

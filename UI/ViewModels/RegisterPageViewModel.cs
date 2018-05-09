@@ -168,8 +168,10 @@ namespace UI.ViewModels
             NavigationService.Navigate(typeof(LoginPage));
         }
 
-
-        private void CheckUserName()
+        /// <summary>
+        /// Checks if the UserName is eligible.
+        /// </summary>
+        public void CheckUserName()
         {
             if (String.IsNullOrWhiteSpace(UserName))
                 ErrorUserName = true;
@@ -177,8 +179,10 @@ namespace UI.ViewModels
                 ErrorUserName = false;
             CheckError();
         }
-
-        private void CheckEmail()
+        /// <summary>
+        /// Checks if the Email is eligible.
+        /// </summary>
+        public void CheckEmail()
         {
             string pattern = null;
             pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
@@ -189,8 +193,10 @@ namespace UI.ViewModels
                 ErrorEmail = true;
             CheckError();
         }
-
-        private void CheckPassword()
+        /// <summary>
+        /// Checks if the Password is eligible.
+        /// </summary>
+        public void CheckPassword()
         {
             if (Password.Length < 8)
                 ErrorPsw = true;
@@ -198,7 +204,9 @@ namespace UI.ViewModels
                 ErrorPsw = false;
             CheckError();
         }
-
+        /// <summary>
+        /// Checks if the two password is equals.
+        /// </summary>
         private void CheckPasswordEquals()
         {
             if (string.Equals(Password, ConfirmPassword))
@@ -207,7 +215,9 @@ namespace UI.ViewModels
                 ErrorPswConfirm = true;
             CheckError();
         }
-
+        /// <summary>
+        /// Checks whether everything is eligible.
+        /// </summary>
         private void CheckError()
         {
             if (ErrorUserName == false)

@@ -14,7 +14,11 @@ namespace UI.Services
     class AccountManager
     {
         private readonly Uri baseAddr = new Uri("http://localhost:55388/");
-
+        /// <summary>
+        /// Returns an Account details.
+        /// </summary>
+        /// <param name="id">The Account ID for which we want to get the details.</param>
+        /// <returns></returns>
         public async Task<Account> DetailsAsync(string id)
         {
             using (var client = new HttpClient())
@@ -31,7 +35,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Account can not be found");
         }
-
+        /// <summary>
+        /// Register the given user.
+        /// </summary>
+        /// <param name="model">The model we want to Register.</param>
+        /// <returns></returns>
         public async Task<Account> RegsiterAsync(RegisterModel model)
         {
             if (model == null)
@@ -53,7 +61,11 @@ namespace UI.Services
             }
             throw new ServiceConnectException("Service unavailable");
         }
-
+        /// <summary>
+        /// Returns an Account details by E-mail address.
+        /// </summary>
+        /// <param name="email">The Account E-Mail address for which we want to get the details.</param>
+        /// <returns></returns>
         public async Task<Account> GetAccountByEmail(string email)
         {
             using (var client = new HttpClient())
@@ -70,7 +82,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Account can not be found");
         }
-
+        /// <summary>
+        /// Returns an Account Details by UserName.
+        /// </summary>
+        /// <param name="username">The Account UserName for which we want to get the details.</param>
+        /// <returns></returns>
         public async Task<Account> GetAccountByUserName(string username)
         {
             using (var client = new HttpClient())
@@ -87,7 +103,10 @@ namespace UI.Services
             }
             throw new NotFoundException("Account can not be found");
         }
-
+        /// <summary>
+        /// Logout the current Account.
+        /// </summary>
+        /// <returns></returns>
         public async Task LogOutAsync()
         {
             using (var client = new HttpClient())
@@ -97,7 +116,10 @@ namespace UI.Services
                 var response = await client.PostAsync(route, null);
             }
         }
-
+        /// <summary>
+        /// Clear cookies to be sure everything is clear for a login.
+        /// </summary>
+        /// <returns></returns>
         public async Task ClearCookiesAsnyc()
         {
             using (var client = new HttpClient())
@@ -107,7 +129,11 @@ namespace UI.Services
                 await client.GetAsync(route);
             }
         }
-
+        /// <summary>
+        /// Login the current Account.
+        /// </summary>
+        /// <param name="model">The model we wants to login.</param>
+        /// <returns></returns>
         public async Task<Account> LogInAsync(LoginViewModel model)
         {
             using (var client = new HttpClient())
@@ -128,24 +154,6 @@ namespace UI.Services
                     return null;
             }
             throw new ServiceConnectException("Service unavailable");
-        }
-
-
-        public async Task ExternalLoginAsync(string provider, string returnUrl)
-        {
-            using (var client = new HttpClient())
-            {
-                if (provider == null)
-                    return;
-                var package = await Task.Run(() => JsonConvert.SerializeObject(provider));
-                var myContent = new StringContent(package, Encoding.UTF8, "application/json");
-
-                var package2 = await Task.Run(() => JsonConvert.SerializeObject(returnUrl));
-                var myContent2 = new StringContent(package, Encoding.UTF8, "application/json");
-
-                client.BaseAddress = baseAddr;
-                string route = "Accounts/ExternalLogin";
-            }
         }
     }
 }

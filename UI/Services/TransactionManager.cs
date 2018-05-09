@@ -14,7 +14,9 @@ namespace UI.Services
     public class TransactionManager
     {
         private readonly Uri baseAddr = new Uri("http://localhost:55388/");
-
+        /// <summary>
+        /// Returns all Transactions from the database.
+        /// </summary>
         public async Task<List<Transaction>> ListTransactionAsync()
         {
             using (var client = new HttpClient())
@@ -31,7 +33,10 @@ namespace UI.Services
             }
             throw new EmptyListException("The database is unavalailable.");
         }
-
+        /// <summary>
+        /// Returns a single Transaction with its properties.
+        /// </summary>
+        /// <param name="transactionid">The transaction ID for which we want to get the details.</param>
         public async Task<Transaction> GetTransactionDetailsAsync(int transactionid)
         {
             using (var client = new HttpClient())
@@ -49,7 +54,11 @@ namespace UI.Services
             throw new NotFoundException("Transaction not found by ID");
         }
 
-
+        /// <summary>
+        /// Returns an Envelope transactions.
+        /// </summary>
+        /// <param name="envelopeid">The envelope ID for which we want to get your transacctions.</param>
+        /// <returns></returns>
         public async Task<List<Transaction>> GetTransactionByEnvelopeIdAsync(int envelopeid)
         {
             using (var client = new HttpClient())
@@ -66,7 +75,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Given Envelope has no Transaction");
         }
-
+        /// <summary>
+        /// Create the given transaction.
+        /// </summary>
+        /// <param name="transaction">The transaction we want to create.</param>
+        /// <returns></returns>
         public async Task<Transaction> CreateTransactionAsync(Transaction transaction)
         {
             if (transaction == null)
@@ -101,7 +114,11 @@ namespace UI.Services
             }
             throw new ServiceConnectException("Service unavailable");
         }
-
+        /// <summary>
+        /// Returns the details of a transaction we wants to delete.
+        /// </summary>
+        /// <param name="transactionid">Transaction ID that we want to delete.</param>
+        /// <returns></returns>
         public async Task<Transaction> DeleteAsync(int transactionid)
         {
             using (var client = new HttpClient())
@@ -119,7 +136,11 @@ namespace UI.Services
             throw new NotFoundException("Transaction not found by Id");
         }
 
-
+        /// <summary>
+        /// Delete the transaction from the database.
+        /// </summary>
+        /// <param name="transactionid">Transaction ID that we want to delete.</param>
+        /// <returns></returns>
         public async Task<bool> DeleteTransactionConfirmedAsync(int transactionid)
         {
             using (var client = new HttpClient())
@@ -135,7 +156,11 @@ namespace UI.Services
             }
 
         }
-
+        /// <summary>
+        /// Returns the details of a transaction we wants to edit.
+        /// </summary>
+        /// <param name="transactionid">Transaction ID that we want to edit.</param>
+        /// <returns></returns>
         public async Task<Transaction> EditAsync(int transactionid)
         {
             using (var client = new HttpClient())
@@ -153,7 +178,11 @@ namespace UI.Services
             throw new NotFoundException("Transaction not found by Id");
         }
 
-
+        /// <summary>
+        /// Update the given transaction in the database.
+        /// </summary>
+        /// <param name="transaction">Transaction ID that we want to edit.</param>
+        /// <returns></returns>
         public async Task<Transaction> EditTransactionAsync(Transaction transaction)
         {
             if (transaction == null)

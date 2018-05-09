@@ -22,12 +22,14 @@ namespace UI.ViewModels
         public ObservableCollection<Envelope> Envelopes { get; set; } = new ObservableCollection<Envelope>();
         public ObservableCollection<EnvelopePageViewModel> EnvelopesViewModel { get; set; } = new ObservableCollection<EnvelopePageViewModel>();
         private string _name;
-        private int envelopeId;
         static string accID;
         private string _userName;
         private string _email;
         private string _gender;
         private string _birthDay;
+        private bool _loading;
+        private int _value;
+        private Envelope _envelope;
 
         public string BirthDay
         {
@@ -38,7 +40,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public string Gender
         {
             get { return _gender; }
@@ -47,7 +48,6 @@ namespace UI.ViewModels
                 Set(ref _gender, value);
             }
         }
-
 
         public string EmailAddress
         {
@@ -58,7 +58,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public string UserName
         {
             get { return _userName; }
@@ -67,9 +66,6 @@ namespace UI.ViewModels
                 Set(ref _userName, value);
             }
         }
-
-
-        private bool _loading;
 
         public bool Loading
         {
@@ -80,7 +76,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public string EnvelopeName
         {
             get { return _name; }
@@ -90,8 +85,6 @@ namespace UI.ViewModels
             }
         }
 
-        private int _value;
-
         public int EnvelopeValue
         {
             get { return _value; }
@@ -100,19 +93,6 @@ namespace UI.ViewModels
                 Set(ref _value, value);
             }
         }
-
-
-
-        public DelegateCommand Navigate { get; }
-
-        public DelegateCommand CreateEnvelope { get; }
-
-        public DelegateCommand Delete { get; }
-
-        public DelegateCommand LogOut { get; }
-
-        private Envelope _envelope;
-
         public Envelope SelectedEnvelope
         {
             get { return _envelope; }
@@ -121,6 +101,11 @@ namespace UI.ViewModels
                 Set(ref _envelope, value);
             }
         }
+
+        public DelegateCommand Navigate { get; }
+        public DelegateCommand CreateEnvelope { get; }
+        public DelegateCommand Delete { get; }
+        public DelegateCommand LogOut { get; }
 
         public EnvelopePageViewModel()
         {
@@ -157,7 +142,6 @@ namespace UI.ViewModels
                 await LoadAsync();
             }
         }
-
         private void NavigateToNewEnvelope()
         {
             NavigationService.Navigate(typeof(NewEnvelopePage), accID);
@@ -173,7 +157,6 @@ namespace UI.ViewModels
 
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
-
         private async Task LoadAccount()
         {
             var service = new AccountManager();
@@ -188,12 +171,10 @@ namespace UI.ViewModels
             BirthDay = account.BirthDay.Year.ToString() + "." + account.BirthDay.Month.ToString() + "." + account.BirthDay.Day.ToString();
 
         }
-
         public void NavigateToDetails()
         {
             NavigationService.Navigate(typeof(EnvelopeDetails), SelectedEnvelope.Id);
         }
-
         private async Task LoadAsync()
         {
             Envelopes.Clear();

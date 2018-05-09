@@ -12,7 +12,6 @@ namespace UI.Converter
         public T FalseValue { get; set; }
         public T TrueValue { get; set; }
 
-
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value == null)

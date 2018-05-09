@@ -20,7 +20,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" Opacity="0.5"/>
         </Grid.Background>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -41,24 +41,24 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                   Text="Create a New Transaction" FontSize="20"
+                   Text="Create a New Transaction" FontSize="25"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}" Foreground="{Binding ErrorName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
+                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " Margin="3" PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}" Foreground="{Binding ErrorName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
 
-                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Name: " PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}" Foreground="{Binding ErrorValue, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be greater than zero"/>
+                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Name: " Margin="3" PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}" Foreground="{Binding ErrorValue, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be greater than zero"/>
 
-                    <CalendarDatePicker x:Name="TranDate" Grid.Row="2" Grid.Column="0" Header="Transaction Date: " Date="{Binding TranDate, Mode=TwoWay}"/>
+                    <CalendarDatePicker x:Name="TranDate" Grid.Row="2" Grid.Column="0" Margin="3" Header="Transaction Date: " Date="{Binding TranDate, Mode=TwoWay}"/>
 
-                    <ComboBox x:Name="TranType" Grid.Row="2" Grid.Column="2" ItemsSource="{Binding TransactionTypes}" Header="Transaction Type: " PlaceholderText="Select the Transaction Type" SelectedItem="{Binding TranType, Mode=TwoWay}"/>
+                    <ComboBox x:Name="TranType" Grid.Row="2" Grid.Column="2" ItemsSource="{Binding TransactionTypes}" Margin="3" Header="Transaction Type: " PlaceholderText="Select the Transaction Type" SelectedItem="{Binding TranType, Mode=TwoWay}"/>
 
 
-                    <TextBox x:Name="tb_TranDetails" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Header="Transaction Details" PlaceholderText="Type the Transaction details" Text="{Binding TranDetails, Mode=TwoWay}"/>
+                    <TextBox x:Name="tb_TranDetails" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="3" Header="Transaction Details" PlaceholderText="Type the Transaction details" Text="{Binding TranDetails, Mode=TwoWay}"/>
 
-                    <Button Grid.Row="4" Grid.Column="0" Content="Save"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CreateTransactionCommand}"
-                IsEnabled="{Binding HasError}"/>
+                    <Button Grid.Row="4" Grid.Column="0" Content="Save"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CreateTransactionCommand}" BorderBrush="Black" BorderThickness="1.5" Margin="10,0,0,0" Padding="5"
+                                     IsEnabled="{Binding HasError}"/>
 
-                    <Button Grid.Row="4" Grid.Column="3" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CancelCommand}"/>
+                    <Button Grid.Row="4" Grid.Column="3" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CancelCommand}" BorderBrush="Black" BorderThickness="1.5" Margin="0,0,15,0" Padding="5"/>
 
                 </Grid>
             </Border>

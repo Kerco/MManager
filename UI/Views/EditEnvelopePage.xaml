@@ -18,7 +18,7 @@
     </Page.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" Opacity="0.5"/>
         </Grid.Background>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <Border BorderThickness="2" Margin="20" CornerRadius="10" BorderBrush="Firebrick" VerticalAlignment="Center">
@@ -38,19 +38,19 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                   Text="Edit Envelope" FontSize="20"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                   Text="Edit Envelope" FontSize="25"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Normal"/>
 
-                    <TextBox x:Name="tb_EnvelopeName" Grid.Row="1" Grid.Column="0" Header="Envelope Name: " PlaceholderText="Type the Envelope Name" Text="{Binding EnvelopeName, Mode=TwoWay }" Foreground="{Binding ErrorName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
+                    <TextBox x:Name="tb_EnvelopeName" Grid.Row="1" Grid.Column="0" Header="Envelope Name: " Margin="3" PlaceholderText="Type the Envelope Name" Text="{Binding EnvelopeName, Mode=TwoWay }" Foreground="{Binding ErrorName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
 
-                    <TextBox x:Name="tb_EnvelopeValue" Grid.Row="1" Grid.Column="2" Header="Envelope Value: " PlaceholderText="Type the Envelope Value" Text="{Binding EnvelopeValue, Mode=TwoWay}" Foreground="{Binding ErrorValue, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be greater than zero"/>
+                    <TextBox x:Name="tb_EnvelopeValue" Grid.Row="1" Grid.Column="2" Header="Envelope Value: " Margin="3" PlaceholderText="Type the Envelope Value" Text="{Binding EnvelopeValue, Mode=TwoWay}" Foreground="{Binding ErrorValue, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be greater than zero"/>
 
-                    <TextBox x:Name="tb_EnvelopeDetails" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Envelope Details" PlaceholderText="Type the Envelope details" Text="{Binding EnvelopeDetails, Mode=TwoWay}"/>
+                    <TextBox x:Name="tb_EnvelopeDetails" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Envelope Details" Margin="3" PlaceholderText="Type the Envelope details" Text="{Binding EnvelopeDetails, Mode=TwoWay}"/>
 
                     <Button Grid.Row="3" Grid.Column="0" Content="Save"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding EditEnvelopeCommand}"
-                IsEnabled="{Binding HasError}"/>
+                IsEnabled="{Binding HasError}" BorderBrush="Black" BorderThickness="1.5" Margin="5" Padding="5"/>
 
-                    <Button Grid.Row="3" Grid.Column="3" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CancelCommand}"/>
+                    <Button Grid.Row="3" Grid.Column="3" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding CancelCommand}" BorderBrush="Black" BorderThickness="1.5" Margin="5" Padding="5"/>
                 </Grid>
             </Border>
         </StackPanel>

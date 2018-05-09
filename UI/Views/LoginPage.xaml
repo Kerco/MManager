@@ -14,7 +14,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" Opacity="0.5"/>
         </Grid.Background>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -34,11 +34,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Login" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" Header="UserName" PlaceholderText="Type your UserName" Text="{Binding EmailAddress, Mode=TwoWay}" Margin="10,0,0,0"/>
-                    <PasswordBox Grid.Row="2" Grid.ColumnSpan="2" PlaceholderText="Type your Password" Header="Password" Password="{Binding Password, Mode=TwoWay}" Margin="10,0,0,0"/>
-                    <Button Grid.Row="3" Grid.Column="0" Content="Login" HorizontalAlignment="Center" Command="{Binding Login}" Margin="10,0,0,0"/>
-                    <Button Grid.Row="3" Grid.Column="2" Content="Create New Account" HorizontalAlignment="Center" Command="{Binding Register}" Margin="10,0,0,0"/>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Login" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" Header="UserName" PlaceholderText="Type your UserName" Text="{Binding EmailAddress, Mode=TwoWay}" Margin="3"/>
+                    <PasswordBox Grid.Row="2" Grid.ColumnSpan="2" PlaceholderText="Type your Password" Header="Password" Password="{Binding Password, Mode=TwoWay}" Margin="3"/>
+                    <Button Grid.Row="3" Grid.Column="0" Content="Login" HorizontalAlignment="Center" Command="{Binding Login}" Margin="10,0,0,0" BorderBrush="Black" BorderThickness="1.5" Padding="5"/>
+                    <Button Grid.Row="3" Grid.Column="2" Content="Create New Account" HorizontalAlignment="Center" Command="{Binding Register}" Margin="0,0,20,0" BorderBrush="Black" BorderThickness="1.5" Padding="5"/>
 
                 </Grid>
             </Border>

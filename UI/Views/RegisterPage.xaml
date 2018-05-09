@@ -19,7 +19,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" Opacity="0.5" />
         </Grid.Background>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -42,24 +42,24 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Registration Page" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Registration Page" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" PlaceholderText="Type your UserName" Header="UserName" Text="{Binding UserName, Mode=TwoWay}" Margin="10,0,0,0" Foreground="{Binding ErrorUserName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
-                    <TextBox Grid.Row="2" Grid.ColumnSpan="2" Header="E-Mail" PlaceholderText="Type your E-Mail address" Text="{Binding EmailAddress, Mode=TwoWay}" Margin="10,0,0,0" Foreground="{Binding ErrorEmail, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be e-mail format"/>
-                    <PasswordBox Grid.Row="3" Grid.ColumnSpan="2" PlaceholderText="Type your Password" Header="Password" Password="{Binding Password, Mode=TwoWay}" Margin="10,0,0,0" Foreground="{Binding ErrorPsw, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least eight character,
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" PlaceholderText="Type your UserName" Header="UserName" Text="{Binding UserName, Mode=TwoWay}" Margin="10,2,0,2" Foreground="{Binding ErrorUserName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
+                    <TextBox Grid.Row="2" Grid.ColumnSpan="2" Header="E-Mail" PlaceholderText="Type your E-Mail address" Text="{Binding EmailAddress, Mode=TwoWay}" Margin="10,2,0,2" Foreground="{Binding ErrorEmail, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be e-mail format"/>
+                    <PasswordBox Grid.Row="3" Grid.ColumnSpan="2" PlaceholderText="Type your Password" Header="Password" Password="{Binding Password, Mode=TwoWay}" Margin="10,2,0,2" Foreground="{Binding ErrorPsw, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least eight character,
                                  Must be at least six different character,
                                  Must contain an uppercase character,
                                  Must contain a digit"            
                                  />
-                    <PasswordBox Grid.Row="4" Grid.ColumnSpan="2" PlaceholderText="Re-Type your Password" Header="Confirm Password" Password="{Binding ConfirmPassword, Mode=TwoWay}" Margin="10,0,0,0" Foreground="{Binding ErrorPswConfirm, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least eight character,
+                    <PasswordBox Grid.Row="4" Grid.ColumnSpan="2" PlaceholderText="Re-Type your Password" Header="Confirm Password" Password="{Binding ConfirmPassword, Mode=TwoWay}" Margin="10,2,0,2" Foreground="{Binding ErrorPswConfirm, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least eight character,
                                  Must be at least six different character,
                                  Must contain an uppercase character,
                                  Must contain a digit"            
                                  />
-                    <ComboBox Grid.Row="5" Grid.Column="0" ItemsSource="{Binding GenderType}" Header="Gender" PlaceholderText="Pick your Gender" SelectedItem="{Binding SelectedGender, Mode=TwoWay}" Margin="10,0,0,0"/>
-                    <CalendarDatePicker Grid.Row="5" Grid.Column="2" Header="Birthday" Date="{Binding BirthDay, Mode=TwoWay}" Margin="10,0,0,0"/>
-                    <Button Grid.Row="6" Grid.Column="0" Content="Register" HorizontalAlignment="Center" Command="{Binding Register}" Margin="10,0,0,0" IsEnabled="{Binding HasError}"/>
-                    <Button Grid.Row="6" Grid.Column="2" Content="Cancel" HorizontalAlignment="Center" Command="{Binding Cancel}" Margin="10,0,0,0"/>
+                    <ComboBox Grid.Row="5" Grid.Column="0" ItemsSource="{Binding GenderType}" Header="Gender" PlaceholderText="Pick your Gender" SelectedItem="{Binding SelectedGender, Mode=TwoWay}" Margin="10,2,0,2"/>
+                    <CalendarDatePicker Grid.Row="5" Grid.Column="2" Header="Birthday" Date="{Binding BirthDay, Mode=TwoWay}" Margin="10,2,0,2"/>
+                    <Button Grid.Row="6" Grid.Column="0" Content="Register" HorizontalAlignment="Center" Command="{Binding Register}" Margin="10,0,0,0" IsEnabled="{Binding HasError}" BorderBrush="Black" BorderThickness="1.5" Padding="5"/>
+                    <Button Grid.Row="6" Grid.Column="2" Content="Cancel" HorizontalAlignment="Center" Command="{Binding Cancel}" Margin="0,0,15,0" BorderBrush="Black" BorderThickness="1.5" Padding="5"/>
 
                 </Grid>
             </Border>

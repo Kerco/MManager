@@ -21,7 +21,7 @@ namespace UI.ViewModels
         private bool _hasError;
         private string envelopeAccountID;
         private bool _errorName;
-
+        private bool _errorValue;
         public bool ErrorName
         {
             get { return !_errorName; }
@@ -31,8 +31,6 @@ namespace UI.ViewModels
             }
         }
 
-        private bool _errorValue;
-
         public bool ErrorValue
         {
             get { return !_errorValue; }
@@ -41,12 +39,6 @@ namespace UI.ViewModels
                 Set(ref _errorValue, value);
             }
         }
-
-
-        public DelegateCommand EditEnvelopeCommand { get; }
-        public DelegateCommand CancelCommand { get; }
-
-
         public Envelope Envelope
         {
             get { return _envelope; }
@@ -55,7 +47,6 @@ namespace UI.ViewModels
                 Set(ref _envelope, value);
             }
         }
-
 
         public string EnvelopeDetails
         {
@@ -67,7 +58,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public int EnvelopeValue
         {
             get { return _envelopeValue; }
@@ -77,7 +67,6 @@ namespace UI.ViewModels
                 CheckValue();
             }
         }
-
 
         public string EnvelopeName
         {
@@ -97,6 +86,9 @@ namespace UI.ViewModels
                 Set(ref _hasError, value);
             }
         }
+
+        public DelegateCommand EditEnvelopeCommand { get; }
+        public DelegateCommand CancelCommand { get; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -142,8 +134,10 @@ namespace UI.ViewModels
 
             NavigationService.Navigate(typeof(EnvelopeDetails), envelopeID);
         }
-
-        private void CheckName()
+        /// <summary>
+        /// Checks if the name is eligible.
+        /// </summary>
+        public void CheckName()
         {
             if (string.IsNullOrWhiteSpace(EnvelopeName))
             {
@@ -155,8 +149,10 @@ namespace UI.ViewModels
 
             CheckError();
         }
-
-        private void CheckValue()
+        /// <summary>
+        /// Checks if the Value is eligible.
+        /// </summary>
+        public void CheckValue()
         {
             if (EnvelopeValue <= 0)
             {
@@ -166,8 +162,10 @@ namespace UI.ViewModels
 
             CheckError();
         }
-
-        private void CheckError()
+        /// <summary>
+        /// Checks if everything is eligible.
+        /// </summary>
+        public void CheckError()
         {
             if (ErrorName == false)
             {

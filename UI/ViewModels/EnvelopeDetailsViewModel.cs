@@ -60,7 +60,6 @@ namespace UI.ViewModels
                 Set(ref _accEmail, value);
             }
         }
-
         public string AccUserName
         {
             get { return _accUserName; }
@@ -97,7 +96,6 @@ namespace UI.ViewModels
             }
         }
 
-
         public int Income
         {
             get { return _income; }
@@ -106,14 +104,6 @@ namespace UI.ViewModels
                 Set(ref _income, value);
             }
         }
-
-        public DelegateCommand CreateNewTransactionCommand { get; }
-        public DelegateCommand EditEnvelopeCommand { get; }
-        public DelegateCommand EditTransactionCommand { get; }
-        public DelegateCommand DeleteEnvelopeCommand { get; }
-        public DelegateCommand DeleteTransactionCommand { get; }
-        public DelegateCommand Logout { get; }
-
         public string EnvelopeDetails
         {
             get { return _envelopeDetails; }
@@ -140,6 +130,12 @@ namespace UI.ViewModels
                 Set(ref _envelope, value);
             }
         }
+        public DelegateCommand CreateNewTransactionCommand { get; }
+        public DelegateCommand EditEnvelopeCommand { get; }
+        public DelegateCommand EditTransactionCommand { get; }
+        public DelegateCommand DeleteEnvelopeCommand { get; }
+        public DelegateCommand DeleteTransactionCommand { get; }
+        public DelegateCommand Logout { get; }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
@@ -180,7 +176,6 @@ namespace UI.ViewModels
             }
 
         }
-
         private async void DeleteConfirmation()
         {
 
@@ -202,22 +197,18 @@ namespace UI.ViewModels
                 NavigationService.Navigate(typeof(EnvelopePage), accID);
             }
         }
-
         private void NavigateToEditTransaction()
         {
             NavigationService.Navigate(typeof(EditTransactionPage), SelecetedTransaction.Id);
         }
-
         private void NavigateToEditEnvelope()
         {
             NavigationService.Navigate(typeof(EditEnvelopePage), envelopeID);
         }
-
         public void NavigateToNewTransaction()
         {
             NavigationService.Navigate(typeof(NewTransactionPage), envelopeID);
         }
-
         private async void LogOutAsync()
         {
             var service = new AccountManager();
@@ -225,7 +216,6 @@ namespace UI.ViewModels
 
             NavigationService.Navigate(typeof(LoginPage));
         }
-
         private async Task Load()
         {
             Transactions.Clear();
@@ -233,8 +223,6 @@ namespace UI.ViewModels
             Envelope = await service.GetEnvelopeDetailsWithTransactionAsync(envelopeID);
             Income = 0;
             Expense = 0;
-
-
             foreach (var item in Envelope.Transactions)
             {
                 if (item.Type == false)
@@ -249,9 +237,7 @@ namespace UI.ViewModels
             remaining = Income - Expense;
             RemainingMoney = remaining.ToString();
             accID = Envelope.AccountId;
-
         }
-
         private async Task LoadAccount()
         {
             var service = new AccountManager();
@@ -264,9 +250,6 @@ namespace UI.ViewModels
             else if (account.Gender == false)
                 AccGender = "Female";
             AccBirthDay = account.BirthDay.Year.ToString() + "." + account.BirthDay.Month.ToString() + "." + account.BirthDay.Day.ToString();
-
         }
-
-
     }
 }

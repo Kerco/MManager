@@ -14,7 +14,10 @@ namespace UI.Services
     class EnvelopeManager
     {
         private readonly Uri baseAddr = new Uri("http://localhost:55388/");
-
+        /// <summary>
+        /// Returns all Envelopes from the database.
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Envelope>> ListEnvelopesAsync()
         {
             using (var client = new HttpClient())
@@ -31,7 +34,11 @@ namespace UI.Services
             }
             throw new EmptyListException("The database is unavalailable.");
         }
-
+        /// <summary>
+        /// Returns all Envelopes for a user.
+        /// </summary>
+        /// <param name="accountid">The account ID to receive the Envelopes. </param>
+        /// <returns></returns>
         public async Task<List<Envelope>> GetEnvelopeByAccountAsync(string accountid)
         {
             using (var client = new HttpClient())
@@ -48,7 +55,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Given Account has no Envelope");
         }
-
+        /// <summary>
+        /// Returns an Envelope details.
+        /// </summary>
+        /// <param name="envelopeid">The envelope ID for which we want to get the details.</param>
+        /// <returns></returns>
         public async Task<Envelope> GetEnvelopeDetailsAsync(int envelopeid)
         {
             using (var client = new HttpClient())
@@ -65,8 +76,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Envelope not found by ID");
         }
-
-
+        /// <summary>
+        /// Returns an Envelope details with its Transactions.
+        /// </summary>
+        /// <param name="envelopeid">The envelope ID for which we want to get the details.</param>
+        /// <returns></returns>
         public async Task<Envelope> GetEnvelopeDetailsWithTransactionAsync(int envelopeid)
         {
             using (var client = new HttpClient())
@@ -83,7 +97,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Envelope not found by ID");
         }
-
+        /// <summary>
+        /// Create the given envelope.
+        /// </summary>
+        /// <param name="envelope">The envelope we want to create.</param>
+        /// <returns></returns>
         public async Task<Envelope> CreateEnvelopeAsync(Envelope envelope)
         {
             if (envelope == null)
@@ -107,7 +125,11 @@ namespace UI.Services
             throw new ServiceConnectException("Service unavailable");
 
         }
-
+        /// <summary>
+        /// Returns the details of an envelope we wants to delete.
+        /// </summary>
+        /// <param name="envelopeid">Envelope ID that we want to delete.</param>
+        /// <returns></returns>
         public async Task<Envelope> EditAsync(int envelopeid)
         {
             using (var client = new HttpClient())
@@ -124,7 +146,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Envelope not found by ID");
         }
-
+        /// <summary>
+        /// Delete the envelope from the database.
+        /// </summary>
+        /// <param name="envelope">Envelope ID that we want to delete.</param>
+        /// <returns></returns>
         public async Task<Envelope> EditEnvelopeAsync(Envelope envelope)
         {
             if (envelope == null)
@@ -154,7 +180,11 @@ namespace UI.Services
             }
             throw new ServiceConnectException("Service unavailable");
         }
-
+        /// <summary>
+        /// Returns the details of an envelope we wants to edit.
+        /// </summary>
+        /// <param name="envelopeid">Envelope ID that we want to edit.</param>
+        /// <returns></returns>
         public async Task<Envelope> DeleteAsync(int envelopeid)
         {
             using (var client = new HttpClient())
@@ -171,7 +201,11 @@ namespace UI.Services
             }
             throw new NotFoundException("Envelope not found by ID");
         }
-
+        /// <summary>
+        /// Update the given envelope in the database.
+        /// </summary>
+        /// <param name="envelopeid">Envelope ID that we want to edit.</param>
+        /// <returns></returns>
         public async Task<bool> DeleteEnvelopeConfirmedAsync(int envelopeid)
         {
             using (var client = new HttpClient())

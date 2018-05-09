@@ -97,7 +97,7 @@ namespace UI.ViewModels
         }
         private void Cancel()
         {
-            NavigationService.Navigate(typeof(EnvelopePage));
+            NavigationService.Navigate(typeof(EnvelopePage),accID);
         }
         private async void CreateAsync()
         {
@@ -114,7 +114,10 @@ namespace UI.ViewModels
             NavigationService.Navigate(typeof(EnvelopePage), accID);
 
         }
-        private void CheckName()
+        /// <summary>
+        /// Checks if the Name is eligible.
+        /// </summary>
+        public void CheckName()
         {
             if (string.IsNullOrWhiteSpace(EnvelopeName))
                 ErrorName = true;
@@ -122,16 +125,20 @@ namespace UI.ViewModels
                 ErrorName = false;
             CheckError();
         }
-
-        private void CheckValue()
+        /// <summary>
+        /// Checks if the value is eligible.
+        /// </summary>
+        public void CheckValue()
         {
             if (EnvelopeValue <= 0)
                 ErrorValue = true;
             else ErrorValue = false;
             CheckError();
         }
-
-        private void CheckError()
+        /// <summary>
+        /// Checks whether everything is eligible.
+        /// </summary>
+        public void CheckError()
         {
             if (ErrorName == false)
             {

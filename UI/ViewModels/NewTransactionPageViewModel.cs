@@ -145,8 +145,10 @@ namespace UI.ViewModels
             HasError = true;
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
-
-        private void CheckName()
+        /// <summary>
+        /// Checks if the Name is eligible.
+        /// </summary>
+        public void CheckName()
         {
             if (string.IsNullOrWhiteSpace(TranName))
                 ErrorName = true;
@@ -154,7 +156,10 @@ namespace UI.ViewModels
                 ErrorName = false;
             CheckError();
         }
-        private void CheckValue()
+        /// <summary>
+        /// Checks if the Value is eligible.
+        /// </summary>
+        public void CheckValue()
         {
             if (TranValue <= 0)
                 ErrorValue = true;
@@ -162,7 +167,10 @@ namespace UI.ViewModels
             else ErrorValue = false;
             CheckError();
         }
-        private void CheckError()
+        /// <summary>
+        /// Checks whether everything is eligible.
+        /// </summary>
+        public void CheckError()
         {
             if (ErrorName == false)
             {
