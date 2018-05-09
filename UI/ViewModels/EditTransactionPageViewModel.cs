@@ -24,6 +24,28 @@ namespace UI.ViewModels
         private string _tranDetails;
         public static int envelopeID;
 
+        private bool _errorName;
+
+        public bool ErrorName
+        {
+            get { return !_errorName; }
+            set
+            {
+                Set(ref _errorName, value);
+            }
+        }
+
+        private bool _errorValue;
+
+        public bool ErrorValue
+        {
+            get { return !_errorValue; }
+            set
+            {
+                Set(ref _errorValue, value);
+            }
+        }
+
         public ObservableCollection<String> TransactionTypes { get; set; } = new ObservableCollection<String>();
 
         private Transaction _transaction;
@@ -88,7 +110,7 @@ namespace UI.ViewModels
             {
 
                 Set(ref _tranName, value);
-                CheckError();
+                CheckName();
 
             }
         }
@@ -99,7 +121,7 @@ namespace UI.ViewModels
             set
             {
                 Set(ref _tranValue, value);
-                CheckError();
+                CheckValue();
             }
         }
 
@@ -157,34 +179,41 @@ namespace UI.ViewModels
             }
 
         }
+        private void CheckName()
+        {
+            if (string.IsNullOrWhiteSpace(TranName))
+            {
+                ErrorName = true;
+
+            }
+            else
+                ErrorName = false;
+
+            CheckError();
+        }
+
+        private void CheckValue()
+        {
+            if (TranValue <= 0)
+            {
+                ErrorValue = true;
+            }
+            else ErrorValue = false;
+
+            CheckError();
+        }
 
         private void CheckError()
         {
-            if (string.IsNullOrEmpty(TranName))
+            if (ErrorName == false)
             {
                 HasError = true;
                 return;
             }
             else HasError = false;
 
-            if (TranValue <= 0)
+            if (ErrorValue == false)
             {
-                HasError = true;
-                return;
-            }
-            else HasError = false;
-
-            if (TranDate == null)
-            {
-
-                HasError = true;
-                return;
-            }
-            else HasError = false;
-
-            if (string.IsNullOrEmpty(TranType))
-            {
-
                 HasError = true;
                 return;
             }

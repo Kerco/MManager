@@ -20,6 +20,28 @@ namespace UI.ViewModels
         private Envelope _envelope;
         private bool _hasError;
         private string envelopeAccountID;
+        private bool _errorName;
+
+        public bool ErrorName
+        {
+            get { return !_errorName; }
+            set
+            {
+                Set(ref _errorName, value);
+            }
+        }
+
+        private bool _errorValue;
+
+        public bool ErrorValue
+        {
+            get { return !_errorValue; }
+            set
+            {
+                Set(ref _errorValue, value);
+            }
+        }
+
 
         public DelegateCommand EditEnvelopeCommand { get; }
         public DelegateCommand CancelCommand { get; }
@@ -52,7 +74,7 @@ namespace UI.ViewModels
             set
             {
                 Set(ref _envelopeValue, value);
-                CheckError();
+                CheckValue();
             }
         }
 
@@ -63,7 +85,7 @@ namespace UI.ViewModels
             set
             {
                 Set(ref _envelopeName, value);
-                CheckError();
+                CheckName();
             }
         }
 
@@ -121,16 +143,40 @@ namespace UI.ViewModels
             NavigationService.Navigate(typeof(EnvelopeDetails), envelopeID);
         }
 
-        private void CheckError()
+        private void CheckName()
         {
             if (string.IsNullOrWhiteSpace(EnvelopeName))
+            {
+                ErrorName = true;
+
+            }
+            else
+                ErrorName = false;
+
+            CheckError();
+        }
+
+        private void CheckValue()
+        {
+            if (EnvelopeValue <= 0)
+            {
+                ErrorValue = true;
+            }
+            else ErrorValue = false;
+
+            CheckError();
+        }
+
+        private void CheckError()
+        {
+            if (ErrorName == false)
             {
                 HasError = true;
                 return;
             }
             else HasError = false;
 
-            if (EnvelopeValue <= 0)
+            if (ErrorValue == false)
             {
                 HasError = true;
                 return;

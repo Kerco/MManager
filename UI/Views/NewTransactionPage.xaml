@@ -6,11 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:UI.ViewModels"
+    xmlns:conv="using:UI.Converter"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:NewTransactionPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <conv:BrushColorConverter x:Key="BrushConv"/>
+    </Page.Resources>
 
 
     <Grid>
@@ -39,9 +44,9 @@
                    Text="Create a New Transaction" FontSize="20"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}"/>
+                    <TextBox x:Name="tb_TranName" Grid.Row="1" Grid.Column="0" Header="Transaction Name: " PlaceholderText="Type the Transaction Name" Text="{Binding TranName, Mode=TwoWay}" Foreground="{Binding ErrorName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
 
-                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Name: " PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}"/>
+                    <TextBox x:Name="tb_TranValue" Grid.Row="1" Grid.Column="2" Header="Transaction Name: " PlaceholderText="Type the Transaction Value" Text="{Binding TranValue, Mode=TwoWay}" Foreground="{Binding ErrorValue, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be greater than zero"/>
 
                     <CalendarDatePicker x:Name="TranDate" Grid.Row="2" Grid.Column="0" Header="Transaction Date: " Date="{Binding TranDate, Mode=TwoWay}"/>
 

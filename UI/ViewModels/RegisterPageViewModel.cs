@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using UI.Model;
@@ -13,6 +14,7 @@ namespace UI.ViewModels
 {
     class RegisterPageViewModel : ViewModelBase
     {
+        public ObservableCollection<String> GenderType { get; set; } = new ObservableCollection<string>();
         private string _gender;
         private DateTimeOffset _birthday;
         private string _name;
@@ -21,69 +23,110 @@ namespace UI.ViewModels
         private string _confirmpsw;
         public DelegateCommand Register { get; }
         public DelegateCommand Cancel { get; }
+        private bool _errorUserName;
+        private bool _errorEmail;
+        private bool _errorPsw;
+        private bool _errorPswConfirm;
+        private bool _hasError;
 
+        public bool HasError
+        {
+            get { return !_hasError; }
+            set
+            {
+                Set(ref _hasError, value);
+            }
+        }
+
+        public bool ErrorUserName
+        {
+            get { return !_errorUserName; }
+            set
+            {
+                Set(ref _errorUserName, value);
+            }
+        }
+
+        public bool ErrorEmail
+        {
+            get { return !_errorEmail; }
+            set
+            {
+                Set(ref _errorEmail, value);
+            }
+        }
+
+        public bool ErrorPsw
+        {
+            get { return !_errorPsw; }
+            set
+            {
+                Set(ref _errorPsw, value);
+            }
+        }
+
+        public bool ErrorPswConfirm
+        {
+            get { return !_errorPswConfirm; }
+            set
+            {
+                Set(ref _errorPswConfirm, value);
+            }
+        }
         public string ConfirmPassword
         {
             get { return _confirmpsw; }
             set
             {
                 Set(ref _confirmpsw, value);
+                CheckPasswordEquals();
             }
         }
-
-
         public string Password
         {
             get { return _psw; }
             set
             {
                 Set(ref _psw, value);
+                CheckPassword();
             }
         }
-
-
         public string EmailAddress
         {
             get { return _email; }
             set
             {
                 Set(ref _email, value);
+                CheckEmail();
             }
         }
-
-
         public string UserName
         {
             get { return _name; }
             set
             {
                 Set(ref _name, value);
+                CheckUserName();
             }
         }
-
-
         public DateTimeOffset BirthDay
         {
             get { return _birthday; }
             set
             {
                 Set(ref _birthday, value);
+                CheckError();
             }
         }
-
-
         public string SelectedGender
         {
             get { return _gender; }
             set
             {
                 Set(ref _gender, value);
+                CheckError();
             }
         }
-
-        public ObservableCollection<String> GenderType { get; set; } = new ObservableCollection<string>();
-
-
         public RegisterPageViewModel()
         {
             Register = new DelegateCommand(Registration);
@@ -91,8 +134,12 @@ namespace UI.ViewModels
             BirthDay = System.DateTime.Now;
             GenderType.Add("Male");
             GenderType.Add("Female");
+            ErrorEmail = true;
+            ErrorPsw = true;
+            ErrorPswConfirm = true;
+            ErrorUserName = true;
+            HasError = true;
         }
-
         private async void Registration()
         {
             var service = new AccountManager();
@@ -116,10 +163,84 @@ namespace UI.ViewModels
 
             NavigationService.Navigate(typeof(EnvelopePage), acc.Id);
         }
-
         private void NavigatoBack()
         {
             NavigationService.Navigate(typeof(LoginPage));
+        }
+
+
+        private void CheckUserName()
+        {
+            if (String.IsNullOrWhiteSpace(UserName))
+                ErrorUserName = true;
+            else
+                ErrorUserName = false;
+            CheckError();
+        }
+
+        private void CheckEmail()
+        {
+            string pattern = null;
+            pattern = "^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
+
+            if (Regex.IsMatch(EmailAddress, pattern))
+                ErrorEmail = false;
+            else
+                ErrorEmail = true;
+            CheckError();
+        }
+
+        private void CheckPassword()
+        {
+            if (Password.Length < 8)
+                ErrorPsw = true;
+            else
+                ErrorPsw = false;
+            CheckError();
+        }
+
+        private void CheckPasswordEquals()
+        {
+            if (string.Equals(Password, ConfirmPassword))
+                ErrorPswConfirm = false;
+            else
+                ErrorPswConfirm = true;
+            CheckError();
+        }
+
+        private void CheckError()
+        {
+            if (ErrorUserName == false)
+            {
+                HasError = true;
+                return;
+            }
+            else HasError = false;
+            if (ErrorEmail == false)
+            {
+                HasError = true;
+                return;
+            }
+            else HasError = false;
+            if (ErrorPsw == false)
+            {
+                HasError = true;
+                return;
+            }
+            else HasError = false;
+            if (ErrorPswConfirm == false)
+            {
+                HasError = true;
+                return;
+            }
+            else HasError = false;
+
+            if (SelectedGender == null)
+            {
+                HasError = true;
+                return;
+            }
+            else HasError = false;
         }
     }
 }

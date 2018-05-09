@@ -5,12 +5,18 @@
     xmlns:local="using:UI.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:UI.ViewModels"
+    xmlns:conv="using:UI.Converter"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:NewEnvelopePageViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <conv:BrushColorConverter x:Key="BrushConv"/>
+    </Page.Resources>
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/background1.jpg" Stretch="UniformToFill" />
@@ -34,9 +40,9 @@
                    Text="Create New Envelope" FontSize="20"
                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <TextBox x:Name="tb_EnvelopeName" Grid.Row="1" Grid.Column="0" Header="Envelope Name: " PlaceholderText="Type the Envelope Name" Text="{Binding EnvelopeName, Mode=TwoWay }"/>
+                    <TextBox x:Name="tb_EnvelopeName" Grid.Row="1" Grid.Column="0" Header="Envelope Name: " PlaceholderText="Type the Envelope Name" Text="{Binding EnvelopeName, Mode=TwoWay }" Foreground="{Binding ErrorName, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be at least one character"/>
 
-                    <TextBox x:Name="tb_EnvelopeValue" Grid.Row="1" Grid.Column="2" Header="Envelope Value: " PlaceholderText="Type the Envelope Value" Text="{Binding EnvelopeValue, Mode=TwoWay}"/>
+                    <TextBox x:Name="tb_EnvelopeValue" Grid.Row="1" Grid.Column="2" Header="Envelope Value: " PlaceholderText="Type the Envelope Value" Text="{Binding EnvelopeValue, Mode=TwoWay}" Foreground="{Binding ErrorValue, Mode=TwoWay, Converter={StaticResource BrushConv}}" ToolTipService.ToolTip="Must be greater than zero"/>
 
                     <TextBox x:Name="tb_EnvelopeDetails" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Header="Envelope Details" PlaceholderText="Type the Envelope details" Text="{Binding EnvelopeDetails, Mode=TwoWay}"/>
 

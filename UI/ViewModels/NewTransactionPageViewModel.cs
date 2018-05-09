@@ -21,12 +21,30 @@ namespace UI.ViewModels
         private bool _hasError = true;
         private string _tranType;
         private string _tranDetails;
-
+        private bool _errorName;
+        private bool _errorValue;
+  
         public DelegateCommand CreateTransactionCommand { get; }
         public DelegateCommand CancelCommand { get; }
 
         public ObservableCollection<String> TransactionTypes { get; set; } = new ObservableCollection<String>();
 
+        public bool ErrorName
+        {
+            get { return !_errorName; }
+            set
+            {
+                Set(ref _errorName, value);
+            }
+        }
+        public bool ErrorValue
+        {
+            get { return !_errorValue; }
+            set
+            {
+                Set(ref _errorValue, value);
+            }
+        }
         public string TranDetails
         {
             get { return _tranDetails; }
@@ -36,8 +54,6 @@ namespace UI.ViewModels
                 CheckError();
             }
         }
-
-
         public string TranType
         {
             get { return _tranType; }
@@ -47,8 +63,6 @@ namespace UI.ViewModels
                 CheckError();
             }
         }
-
-
         public DateTimeOffset TranDate
         {
             get { return _tranDate; }
@@ -59,8 +73,6 @@ namespace UI.ViewModels
 
             }
         }
-
-
         public bool HasError
         {
             get { return !_hasError; }
@@ -69,8 +81,6 @@ namespace UI.ViewModels
                 Set(ref _hasError, value);
             }
         }
-
-
         public string TranName
         {
             get { return _tranName; }
@@ -78,23 +88,19 @@ namespace UI.ViewModels
             {
 
                 Set(ref _tranName, value);
-                CheckError();
+                CheckName();
 
             }
         }
-
-
         public int TranValue
         {
             get { return _tranValue; }
             set
             {
                 Set(ref _tranValue, value);
-                CheckError();
+                CheckValue();
             }
         }
-
-
         public NewTransactionPageViewModel()
         {
             CreateTransactionCommand = new DelegateCommand(CreateAsync);
@@ -134,44 +140,50 @@ namespace UI.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             envelopeID = (int)parameter;
-
+            ErrorName = true;
+            ErrorValue = true;
+            HasError = true;
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        private void CheckName()
+        {
+            if (string.IsNullOrWhiteSpace(TranName))
+                ErrorName = true;
+            else
+                ErrorName = false;
+            CheckError();
+        }
+        private void CheckValue()
+        {
+            if (TranValue <= 0)
+                ErrorValue = true;
+
+            else ErrorValue = false;
+            CheckError();
+        }
         private void CheckError()
         {
-            if (string.IsNullOrEmpty(TranName))
+            if (ErrorName == false)
             {
                 HasError = true;
                 return;
             }
             else HasError = false;
 
-            if (TranValue <= 0)
+            if (ErrorValue == false)
             {
                 HasError = true;
                 return;
             }
             else HasError = false;
 
-            if (TranDate == null)
+            if (TranType == null)
             {
-
                 HasError = true;
                 return;
             }
             else HasError = false;
-
-            if (string.IsNullOrEmpty(TranType))
-            {
-
-                HasError = true;
-                return;
-            }
-            else HasError = false;
-
         }
-
-
     }
 }
